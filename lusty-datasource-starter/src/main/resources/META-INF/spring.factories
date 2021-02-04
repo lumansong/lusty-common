@@ -1,0 +1,4 @@
+#-------starter自动装配---------
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.lusty.datasource.config.DynamicDataSourceConfiguration,\
+com.lusty.datasource.config.DynamicDataSourceAspect

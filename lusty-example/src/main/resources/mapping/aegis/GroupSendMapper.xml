@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lusty.example.mapper.GroupSendMapper">
+  <resultMap id="BaseResultMap" type="com.lusty.example.entity.GroupSendBean">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="corpWxName" jdbcType="VARCHAR" property="corpWxName" />
+    <result column="corpId" jdbcType="VARCHAR" property="corpId" />
+    <result column="account" jdbcType="VARCHAR" property="account" />
+    <result column="nickName" jdbcType="VARCHAR" property="nickName" />
+    <result column="groupSendTitile" jdbcType="VARCHAR" property="groupSendTitile" />
+    <result column="sendContentCount" jdbcType="INTEGER" property="sendContentCount" />
+    <result column="sendType" jdbcType="INTEGER" property="sendType" />
+    <result column="actualSendTime" jdbcType="TIMESTAMP" property="actualSendTime" />
+    <result column="sendTime" jdbcType="TIMESTAMP" property="sendTime" />
+    <result column="creator" jdbcType="VARCHAR" property="creator" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updater" jdbcType="VARCHAR" property="updater" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="platform" jdbcType="VARCHAR" property="platform" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id,corpId,corpWxName, account, nickName, groupSendTitile, sendContentCount, sendType,actualSendTime,
+    sendTime, createTime,creator, updateTime,updater,`status`,platform
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from t_group_send
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+
+  <select id="getSendingData" resultType="com.lusty.example.entity.GroupSendBean">
+    select <include refid="Base_Column_List"/> from t_group_send where status=1
+  </select>
+
+  <select id="selectLt5MinTiming" resultType="com.lusty.example.entity.GroupSendBean">
+    select <include refid="Base_Column_List"/> from t_group_send
+    where status=0 and sendType=1
+    <!--设置时间比创建时间大于5分钟 并且在发送前的5分钟内提醒-->
+    AND DATE_FORMAT(ADDDATE(NOW(), INTERVAL 5 MINUTE),'%Y-%m-%d %H:%i:%s')>= sendTime
+    and sendTime>now()
+    AND sendTime>DATE_FORMAT(ADDDATE(createTime, INTERVAL 5 MINUTE),'%Y-%m-%d %H:%i:%s')
+  </select>
+
+  <delete id="deleteByPrimaryKey">
+      delete from t_group_send  where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert"  useGeneratedKeys="true" keyColumn="id"  keyProperty="gs.id"  >
+    insert into t_group_send (corpId,corpWxName, account, nickName,
+      groupSendTitile, sendContentCount, sendType, 
+      sendTime,actualSendTime,creator,createTime,updater,updateTime,platform,
+      `status`)
+    values (#{gs.corpId,jdbcType=VARCHAR},#{gs.corpWxName,jdbcType=VARCHAR}, #{gs.account,jdbcType=VARCHAR}, #{gs.nickName,jdbcType=VARCHAR},
+      #{gs.groupSendTitile,jdbcType=VARCHAR}, #{gs.sendContentCount,jdbcType=INTEGER}, #{gs.sendType,jdbcType=INTEGER},
+       #{gs.sendTime,jdbcType=TIMESTAMP},#{gs.actualSendTime,jdbcType=TIMESTAMP},#{gs.creator,jdbcType=VARCHAR}, now(),#{gs.updater,jdbcType=VARCHAR},now(),#{gs.platform,jdbcType=VARCHAR},
+      #{gs.status,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lusty.example.entity.GroupSendBean" useGeneratedKeys="true">
+    insert into t_group_send
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="corpWxName != null">
+        corpWxName,
+      </if>
+      <if test="account != null">
+        account,
+      </if>
+      <if test="nickName != null">
+        nickName,
+      </if>
+      <if test="groupSendTitile != null">
+        groupSendTitile,
+      </if>
+      <if test="sendContentCount != null">
+        sendContentCount,
+      </if>
+      <if test="sendType != null">
+        sendType,
+      </if>
+      <if test="sendTime != null">
+        sendTime,
+      </if>
+      <if test="createTime != null">
+        createTime,
+      </if>
+      <if test="updateTime != null">
+        updateTime,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="corpWxName != null">
+        #{corpWxName,jdbcType=VARCHAR},
+      </if>
+      <if test="account != null">
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="groupSendTitile != null">
+        #{groupSendTitile,jdbcType=VARCHAR},
+      </if>
+      <if test="sendContentCount != null">
+        #{sendContentCount,jdbcType=INTEGER},
+      </if>
+      <if test="sendType != null">
+        #{sendType,jdbcType=INTEGER},
+      </if>
+      <if test="sendTime != null">
+        #{sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lusty.example.entity.GroupSendBean">
+    update t_group_send
+    <set>
+      <if test="gs.corpId != null and gs.corpId!=''">
+        corpId = #{gs.corpId,jdbcType=VARCHAR},
+      </if>
+      <if test="gs.corpWxName != null and gs.corpWxName!=''">
+        corpWxName = #{gs.corpWxName,jdbcType=VARCHAR},
+      </if>
+      <if test="gs.account != null and gs.account != ''">
+        account = #{gs.account,jdbcType=VARCHAR},
+      </if>
+      <if test="gs.nickName != null and gs.nickName!=''">
+        nickName = #{gs.nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="gs.groupSendTitile != null and gs.groupSendTitile !=''">
+        groupSendTitile = #{gs.groupSendTitile,jdbcType=VARCHAR},
+      </if>
+      <if test="gs.sendContentCount != null">
+        sendContentCount = #{gs.sendContentCount,jdbcType=INTEGER},
+      </if>
+      <if test="gs.sendType != null ">
+        sendType = #{gs.sendType,jdbcType=INTEGER},
+      </if>
+<!--      <if test="gs.actualSendTime != null">-->
+        actualSendTime = #{gs.actualSendTime,jdbcType=TIMESTAMP},
+<!--      </if>-->
+      <if test="gs.sendTime != null">
+        sendTime = #{gs.sendTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="gs.status != null">
+        `status` = #{gs.status,jdbcType=INTEGER},
+      </if>
+      <if test="gs.updater != null">
+        updater = #{gs.updater,jdbcType=VARCHAR},
+      </if>
+      <if test="gs.platform != null">
+        platform = #{gs.platform,jdbcType=VARCHAR},
+      </if>
+      updateTime = now()
+    </set>
+    where id = #{gs.id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lusty.example.entity.GroupSendBean">
+    update t_group_send
+    set corpWxName = #{corpWxName,jdbcType=VARCHAR},
+      account = #{account,jdbcType=VARCHAR},
+      nickName = #{nickName,jdbcType=VARCHAR},
+      groupSendTitile = #{groupSendTitile,jdbcType=VARCHAR},
+      sendContentCount = #{sendContentCount,jdbcType=INTEGER},
+      sendType = #{sendType,jdbcType=INTEGER},
+      sendTime = #{sendTime,jdbcType=TIMESTAMP},
+      createTime = #{createTime,jdbcType=TIMESTAMP},
+      updateTime = #{updateTime,jdbcType=TIMESTAMP},
+      `status` = #{status,jdbcType=INTEGER}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
