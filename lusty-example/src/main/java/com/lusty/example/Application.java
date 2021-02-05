@@ -1,5 +1,6 @@
 package com.lusty.example;
 
+//import com.lusty.config.anno.EnableLustyConfig;
 import com.lusty.datasource.config.DynamicDataSourceAspect;
 import com.lusty.datasource.config.anno.EnableDyDataSource;
 import demo.anno.EnableDemo;
@@ -12,6 +13,7 @@ import org.springframework.context.annotation.ComponentScan;
 @SpringBootApplication
 @EnableDemo
 @EnableDyDataSource
+//@EnableLustyConfig
 @MapperScan(basePackages = "com.lusty.example.mapper")
 public class Application {
     public static void main(String[] args) {

@@ -3,7 +3,6 @@ package com.lusty.example.controller;
 
 import com.lusty.example.entity.GroupSendBean;
 import com.lusty.example.mapper.GroupSendMapper;
-import demo.service.DemoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,16 +17,16 @@ import org.springframework.web.bind.annotation.RestController;
  **/
 @RestController
 public class DemoController {
-    @Autowired
-    private DemoService demoService;
+//    @Autowired
+//    private DemoService demoService;
 
     @Autowired
     private GroupSendMapper groupSendMapper;
 
-    @GetMapping("/say")
-    public String sayWhat(){
-        return demoService.say();
-    }
+//    @GetMapping("/say")
+//    public String sayWhat(){
+//        return demoService.say();
+//    }
 
     @GetMapping("/testDataSource")
     public GroupSendBean testDataSource(){

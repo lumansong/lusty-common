@@ -10,6 +10,16 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>lusty-config-starter</artifactId>
+    <groupId>com.lu.example</groupId>
+    <version>0.0.1-SNAPSHOT</version>
 
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/com.alibaba.druid/druid-wrapper -->
+        <dependency>
+            <groupId>com.alibaba.druid</groupId>
+            <artifactId>druid-wrapper</artifactId>
+            <version>0.2.9</version>
+        </dependency>
+    </dependencies>
 </project>
