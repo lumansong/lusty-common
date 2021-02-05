@@ -1,7 +1,6 @@
 package com.lusty.example.controller;
 
 
-import com.lusty.datasource.config.anno.DataSource;
 import com.lusty.example.entity.GroupSendBean;
 import com.lusty.example.mapper.GroupSendMapper;
 import demo.service.DemoService;
