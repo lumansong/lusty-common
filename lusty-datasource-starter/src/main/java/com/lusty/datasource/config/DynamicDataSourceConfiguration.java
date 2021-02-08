@@ -25,7 +25,7 @@ import java.util.*;
 public class DynamicDataSourceConfiguration {
 
     @Autowired
-    private DynamicRoutingDataSource dataSource;
+    private DataSource dataSource;
 
     @Bean
     public SqlSessionFactory sqlSessionFactory() throws Exception {
