@@ -31,7 +31,7 @@ public class DemoController {
     @Autowired
     private GroupSendMapper groupSendMapper;
 
-    @Autowired
+    @Autowired(required = false)
     private DataSourceConfigReposit reposit;
 
 //    @GetMapping("/say")
