@@ -1,6 +1,8 @@
 package com.lusty.example.controller;
 
 
+import com.lusty.aop.bean.User;
+import com.lusty.aop.interceptor.UserInfoThreadLocalContext;
 import com.lusty.config.bean.DataSourceConfigReposit;
 import com.lusty.config.bean.DatasourceConfigBean;
 import com.lusty.example.entity.GroupSendBean;
@@ -59,4 +61,12 @@ public class DemoController {
         applicationContext.publishEvent(new MyEvent(this,"鲁猛","测试发布事件"));
         return "success";
     }
+
+    @RequestMapping("/testIncept")
+    public User testIncept(){
+        User user = UserInfoThreadLocalContext.getUser();
+        return user;
+    }
+
+
 }

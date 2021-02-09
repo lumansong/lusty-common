@@ -27,5 +27,10 @@
             <artifactId>lusty-config-starter</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <artifactId>lusty-aop</artifactId>
+            <groupId>com.lu.example</groupId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 </project>

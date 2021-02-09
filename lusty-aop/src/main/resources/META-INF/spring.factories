@@ -1,0 +1,5 @@
+#-------starter自动装配---------
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.lusty.aop.interceptor.AuthInterceptor,\
+com.lusty.aop.interceptor.WebAppConfig  
+

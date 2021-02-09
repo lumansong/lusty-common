@@ -10,6 +10,7 @@
         <module>lusty-datasource-starter</module>
 		<module>lusty-config-starter</module>
 		<module>lusty-doc</module>
+		<module>lusty-aop</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
