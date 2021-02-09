@@ -1,0 +1,30 @@
+=== 使用说明
+
+NOTE: 该组件主要用途 代码中可配置项数据库配置
+
+===== 1.引入jar
+[source,xml]
+----
+        <dependency>
+            <groupId>com.lu.example</groupId>
+            <artifactId>lusty-config-starter</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
+----
+
+===== 2.yml文件中加入
+[source,yml]
+----
+#true 或不配置该项都默认引入   false不加载该组件
+lusty:
+  config:
+    enabled: true
+----
+
+===== 3.引入
+[source,text]
+
+----
+    @Autowired(required = false)
+    private DataSourceConfigReposit reposit;
+----

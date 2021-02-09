@@ -9,6 +9,7 @@
 		<module>lusty-enAnno-demo-starter</module>
         <module>lusty-datasource-starter</module>
 		<module>lusty-config-starter</module>
+		<module>lusty-doc</module>
 	</modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

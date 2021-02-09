@@ -1,0 +1,83 @@
+== springboot 学习总结
+
+==== 1 @ConditionalOnProperty
+@ConditionalOnProperty(value = "lusty.config.enabled", matchIfMissing = true)
+用途可以使用它来控制配置类的是否载入
+#@Autowired(required = false) 非必要加载bean#
+
+NOTE: 以上意思 配置文件中 lusty.config.enabled=true 或者 不配置 都是会加载对应的配置类的
+
+[source,java]
+----
+@ConditionalOnProperty(value = "lusty.config.enabled", matchIfMissing = true)
+public class DatasourceConfigBean {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Bean
+    public DataSourceConfigReposit dataSourceConfigReposit() throws SQLException {
+        DataSourceConfigReposit reposit=new DataSourceConfigReposit(dataSource);
+        return reposit;
+    }
+}
+
+----
+==== 2 自定义 endpoint
+
+[source,java]
+----
+@Configuration
+@Endpoint(id = "my-endpoint")
+public class MyEndpoint {
+
+    @ReadOperation
+    public Map<String, Object> endpoint() {
+        Map<String, Object> map = new HashMap<>(16);
+        map.put("message", "this is my endpoint");
+        return map;
+    }
+}
+----
+
+[source,yml]
+----
+management:
+  endpoints:
+    web:
+      exposure:
+        include: my-endpoint
+----
+
+
+==== 3 spring 自定义监听事件
+[source,java]
+----
+public class MyEvent extends ApplicationEvent {
+   // ....
+        public MyEvent(Object source) {
+        super(source);
+    }
+
+
+    public MyEvent(Object source, String name, String desc) {
+        super(source);
+        this.name = name;
+        this.desc = desc;
+    }
+}
+
+@Component
+@Slf4j
+public class MyEventListener {
+
+    @EventListener
+    public void handMyEvent(MyEvent event){
+        log.info("发布的数据{}", event.toString());
+    }
+}
+----
+
+#最后发布事件applicationContext.publishEvent(new MyEvent(this,"鲁猛","测试发布事件"));#
+
+
