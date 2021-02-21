@@ -1,0 +1,42 @@
+== spring引入外部资源方式
+
+==== 1.@import(clazz)
+
+===== 1.1 clazz 实现 ImportBeanDefinitionRegistrar 接口
+#这种方式更加底层 你可以通过 BeanDefinitionRegistry 更加自由定制自己的需求#
+[source,java]
+----
+public class DynamicDataSourceRegister implements ImportBeanDefinitionRegistrar, EnvironmentAware {
+    @Override
+    public void registerBeanDefinitions(AnnotationMetadata annotationMetadata, BeanDefinitionRegistry beanDefinitionRegistry) {
+     //...
+    }
+}
+----
+
+===== 1.2 clazz 实现 ImportSelector接口
+#selectImports() 返回你所需要的类#
+[source,java]
+------
+
+public class SpringStudySelector implements ImportSelector, BeanFactoryAware {
+    private BeanFactory beanFactory;
+
+    @Override
+    public String[] selectImports(AnnotationMetadata importingClassMetadata) {
+        importingClassMetadata.getAnnotationTypes().forEach(System.out::println);
+        System.out.println(beanFactory);
+        return new String[]{AppConfig.class.getName()};
+    }
+
+    @Override
+    public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+        this.beanFactory = beanFactory;
+    }
+}
+------
+
+
+===== 1.3 就是在 MEATA-INF 下 spring.factories 里引入需要导出的即可
+
+

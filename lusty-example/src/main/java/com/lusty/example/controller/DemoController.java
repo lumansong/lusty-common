@@ -65,6 +65,7 @@ public class DemoController {
     @RequestMapping("/testIncept")
     public User testIncept(){
         User user = UserInfoThreadLocalContext.getUser();
+        int i=1/0;
         return user;
     }
 

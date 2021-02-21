@@ -11,7 +11,8 @@
 		<module>lusty-config-starter</module>
 		<module>lusty-doc</module>
 		<module>lusty-aop</module>
-	</modules>
+        <module>lusty-rpc</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
