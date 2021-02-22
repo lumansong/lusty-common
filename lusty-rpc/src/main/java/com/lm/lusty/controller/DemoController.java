@@ -27,8 +27,7 @@ public class DemoController {
 
     @RequestMapping("/testrpc")
     public String testIncept(){
-        lustyRpcDemo.print();
-        return "success";
+        return lustyRpcDemo.show();
     }
 
 

@@ -17,7 +17,7 @@ public class TestProxy {
 
     @Test
     public void  testPrint(){
-        lustyRpcDemo.print();
+        lustyRpcDemo.show();
     }
 
 }

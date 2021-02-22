@@ -8,11 +8,13 @@ import java.util.Map;
 
 @Data
 @Builder
-public class EndPoint {
+public class HttpEndPoint {
 
     private String protcl;
 
     private String host;
+
+    private String methodName;
 
     private Map<String,String> param;
 

@@ -16,5 +16,6 @@ public @interface LuRpc {
     //指定协议
     String protcl() default "http";
 
-
+    //指定host
+    String host() default "";
 }

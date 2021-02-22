@@ -6,5 +6,5 @@ import com.lm.lusty.anno.LuRpc;
 @LuRpc
 public interface LustyRpcDemo {
 
-    void print();
+    String show();
 }
