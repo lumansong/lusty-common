@@ -1,6 +1,7 @@
 package com.lm.lusty.controller;
 
 
+import com.lm.lusty.rpcInterface.DubboRpcDemo;
 import com.lm.lusty.rpcInterface.LustyRpcDemo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,10 +26,21 @@ public class DemoController {
     @Autowired
     private LustyRpcDemo lustyRpcDemo;
 
+    @Autowired
+    private DubboRpcDemo dubboRpcDemo;
+
     @RequestMapping("/testrpc")
-    public String testIncept(){
+    public String testrpc(){
         return lustyRpcDemo.show();
     }
 
+    @RequestMapping("/testRpcParam")
+    public String testRpcParam(){
+        return lustyRpcDemo.showParam("hejjj",1);
+    }
 
+    @RequestMapping("/testDubbo")
+    public String testDubbo(){
+        return dubboRpcDemo.showParam("dubbo",1);
+    }
 }

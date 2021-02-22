@@ -1,6 +1,7 @@
 package com.lm.lusty.anno;
 
 
+import com.lm.lusty.constant.ProtclConstant;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.*;
@@ -14,7 +15,7 @@ import java.lang.annotation.*;
 public @interface LuRpc {
 
     //指定协议
-    String protcl() default "http";
+    String protcl() default ProtclConstant.HTTP;
 
     //指定host
     String host() default "";

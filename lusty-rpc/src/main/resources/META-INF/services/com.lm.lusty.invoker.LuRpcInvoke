@@ -1,0 +1,2 @@
+com.lm.lusty.invoker.spi.HttpInvoker
+com.lm.lusty.invoker.spi.DubboInvoker

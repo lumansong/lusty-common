@@ -10,4 +10,6 @@ public interface LuRpcInvoke<R extends BaseInvokerResponse> {
 
     void setMehod(Method mehod);
 
+    void setParam(Object[] args);
+
 }

@@ -43,7 +43,7 @@ public class LuRpcRegister implements ImportBeanDefinitionRegistrar {
             definition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
           //  SpringContextHolder.registerBean(definition);
 
-            String simpleNameString=definition.getBeanClassName();
+            String simpleNameString=clazz.getSimpleName();
             if(simpleNameString.contains(".")){
                 simpleNameString=simpleNameString.substring(simpleNameString.lastIndexOf(".")+1);
             }
