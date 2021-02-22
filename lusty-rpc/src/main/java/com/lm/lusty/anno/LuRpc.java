@@ -1,6 +1,8 @@
 package com.lm.lusty.anno;
 
 
+import org.springframework.stereotype.Component;
+
 import java.lang.annotation.*;
 
 /**
