@@ -30,7 +30,7 @@ public class DemoController {
 //    @Autowired
 //    private DemoService demoService;
 
-    @Autowired
+    @Autowired(required = false)
     private GroupSendMapper groupSendMapper;
 
     @Autowired(required = false)

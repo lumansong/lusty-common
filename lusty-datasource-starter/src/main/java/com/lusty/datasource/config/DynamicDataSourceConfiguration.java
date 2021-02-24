@@ -6,7 +6,11 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
@@ -21,7 +25,8 @@ import java.util.*;
 /**
  * @author yandou
  */
-@Configuration
+//@ConditionalOnProperty(prefix = "lusty.datasource",name = "enabled",havingValue = "true")
+@ConditionalOnBean(name = {"datasource"})
 public class DynamicDataSourceConfiguration {
 
     @Autowired

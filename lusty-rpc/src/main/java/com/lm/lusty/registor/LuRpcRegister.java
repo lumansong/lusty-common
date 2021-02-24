@@ -36,9 +36,10 @@ public class LuRpcRegister implements ImportBeanDefinitionRegistrar {
         ClassScanner classScanner=new ClassScanner();
         Set<Class<?>> scan = classScanner.scan(basePackages, LuRpc.class);
         for(Class clazz:scan){
-            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
-            GenericBeanDefinition definition = (GenericBeanDefinition) builder.getRawBeanDefinition();
-            definition.getPropertyValues().add("interfaceClass", definition.getBeanClassName());
+//            BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(clazz);
+//            GenericBeanDefinition definition = (GenericBeanDefinition) builder.getRawBeanDefinition();
+            GenericBeanDefinition definition=new GenericBeanDefinition();
+            definition.getPropertyValues().add("interfaceClass", clazz.getName());
             definition.setBeanClass(LuRpcProxyFactory.class);
             definition.setAutowireMode(GenericBeanDefinition.AUTOWIRE_BY_TYPE);
           //  SpringContextHolder.registerBean(definition);
