@@ -6,6 +6,7 @@ import com.lusty.aop.interceptor.UserInfoThreadLocalContext;
 import com.lusty.config.bean.DataSourceConfigReposit;
 import com.lusty.config.bean.DatasourceConfigBean;
 import com.lusty.example.entity.GroupSendBean;
+import com.lusty.example.event.EventPublisher;
 import com.lusty.example.event.MyEvent;
 import com.lusty.example.mapper.GroupSendMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,7 @@ public class DemoController {
 //    }
 
     @Resource
-    private ApplicationContext applicationContext;
+    private EventPublisher eventPublisher;
 
     @GetMapping("/testDataSource")
     public GroupSendBean testDataSource(){
@@ -58,7 +59,7 @@ public class DemoController {
 
     @RequestMapping("/testListener")
     public String testListener(){
-        applicationContext.publishEvent(new MyEvent(this,"鲁猛","测试发布事件"));
+        eventPublisher.pushEvent(new MyEvent(this,"鲁猛","测试发布事件"));
         return "success";
     }
 
