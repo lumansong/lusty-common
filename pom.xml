@@ -13,6 +13,7 @@
 		<module>lusty-aop</module>
         <module>lusty-rpc</module>
         <module>lusty-sourcecode</module>
+        <module>lusty-netty</module>
     </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>

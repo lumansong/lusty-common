@@ -12,9 +12,13 @@ public class Main {
         Field f = Unsafe.class.getDeclaredField("theUnsafe");
         f.setAccessible(true);
         Unsafe unsafe = (Unsafe) f.get(null);
-        long address = unsafe.staticFieldOffset(Demo.class.getDeclaredField("a"));
-        int anInt = unsafe.getInt(Demo.class, address);
-        unsafe.compareAndSwapInt(Demo.class,address,anInt,anInt+1);
-        System.out.println(unsafe.getInt(Demo.class, address));
+//        long address = unsafe.staticFieldOffset(Demo.class.getDeclaredField("a"));
+//        int anInt = unsafe.getInt(Demo.class, address);
+//        unsafe.compareAndSwapInt(Demo.class,address,anInt,anInt+1);
+//        System.out.println(unsafe.getInt(Demo.class, address));
+       // Object o=new Object();
+        //unsafe.unpark(o);
+        unsafe.park(true,5000);
+
     }
 }
