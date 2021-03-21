@@ -20,15 +20,16 @@ public class NettyHttpServer {
     private ServerBootstrap serverBootstrap;
 
     public void open() throws InterruptedException {
-        serverBootstrap=new ServerBootstrap();
-       // serverBootstrap.option(ChannelOption.SO_BACKLOG,1024);
-        serverBootstrap.group(group).channel(NioServerSocketChannel.class)
-                .childHandler(new NettyServerFilter());
-        ChannelFuture f = serverBootstrap.bind(PORT).sync();
-        f.channel().closeFuture().sync();
+        try {
+            serverBootstrap=new ServerBootstrap();
+            // serverBootstrap.option(ChannelOption.SO_BACKLOG,1024);
+            serverBootstrap.group(group).channel(NioServerSocketChannel.class)
+                    .childHandler(new NettyServerFilter());
+            ChannelFuture f = serverBootstrap.bind(PORT).sync();
+            f.channel().closeFuture().sync();
+        }finally {
+            group.shutdownGracefully();
+        }
     }
 
-    public void close(){
-        group.shutdownGracefully();
-    }
 }
