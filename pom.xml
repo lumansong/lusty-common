@@ -9,7 +9,8 @@
 		<module>lusty-enAnno-demo-starter</module>
         <module>lusty-datasource-starter</module>
 		<module>lusty-config-starter</module>
-	</modules>
+        <module>lusty-fenku</module>
+    </modules>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
@@ -34,7 +35,11 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.1.4</version>
 		</dependency>
-
+		<dependency>
+			<groupId>org.codehaus.groovy</groupId>
+			<artifactId>groovy</artifactId>
+			<version>2.4.9</version>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
